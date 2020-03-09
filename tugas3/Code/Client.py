@@ -15,7 +15,6 @@ def download_gambar(url=None):
     tipe['image/png']='png'
     tipe['image/jpg']='jpg'
     tipe['image/jpeg']='jpg'
-    print(tipe)
     content_type = ff.headers['Content-Type']
     logging.warning(content_type)
     if (content_type in list(tipe.keys())):
