@@ -3,12 +3,12 @@ import threading
 from queue import Queue
 
 host ='localhost'
-def konek(port):
+def connection(port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.settimeout(90000)
     try:
         server_address = (host, port)
-        print(f"starting up on {server_address}")
+        print(f"starting up on {server_address} ")
         sock.bind(server_address)
         sock.listen(1)
         while True:
@@ -26,18 +26,14 @@ def konek(port):
     except:
         connection.close()
 
-que = Queue()
 def c_port():
-    while True:
-        port_c = que.get()
-        konek(port_c)
-        que.task_done()
+    connection(que.get())
 
-for port in range(31000,31003):
-    que.put(port)
-
-for scan in range(1,4):
-    t = threading.Thread(target=c_port)
-    t.daemon=True
-    t.start()
-que.join()
+if __name__ == '__main__':
+    que = Queue()
+    for port in range(31000,31003):
+        que.put(port)
+    for x in range(1,4):
+        t = threading.Thread(target=c_port, daemon=True)
+        t.start()
+    que.join()

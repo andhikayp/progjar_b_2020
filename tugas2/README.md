@@ -1,3 +1,5 @@
+Andhika Yoga Perdana <br> 05111740000101 <br>
+
 # Tugas 2
 ### Menjalankan udp_simple dari IP = 127.0.0.1 dengan port 5006
 #### Pesan yang dikirimkan adalah "ABCDEFGHIJKLMNOPQRSTUV"
