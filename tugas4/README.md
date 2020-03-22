@@ -30,56 +30,40 @@ Andhika Yoga Perdana <br> 05111740000101 <br>
     
 
 ### Melihat List File
-* Bukti
-    Saat client berjalan<br>
-    ![Server](foto/list_client.JPG)
-
-    Saat server berjalan<br>
-    ![Server](foto/list_server.JPG)
-
-    Hasil File<br>
-    ![Dua komputer yang berbeda : Server](foto/list_file.jpg)<br> Server <br>
+* Client meminta request data file apa saja yang tersimpan pada server
+* Server mengirimkan list file yang tersimpan ke client yang berformat JSON
+* client menampilkan list file menggunakan dataframe agar mudah dilihat
+* Setiap proses yang terjadi pada server tercatat pada log
 
 ### Ketentuan Membaca Format
-* Bukti
-    client mengirim file ke server<br>
-    ![Client](foto/1a_client.JPG)
-
-    server menerima file<br>
-    ![Server](foto/1a_server.JPG)
-
-    bukti file yang dikirimkan<br>
-    ![Bukti](foto/1a_hasil.JPG)
-
+* Format yang digunakan setiap request data adalah dalam bentuk JSON
+* Default format json yang digunakan : json.dumps(dict(aksi="transfer", file=message, size=size, type=file_extension))
+    
 ### Daftar Fitur 
-* Bukti
-    client request file ke server<br>
-    ![Client](foto/1b_client.JPG)
-
-    server mengirimkan file <br>
-    ![Server](foto/1b_server.JPG)
-
-    bukti file yang dikirimkan<br>
-    ![Bukti](foto/1b_hasil.JPG)
+* Meletakkan file dari client ke server
+    * Komputer client dapat melihat file apa aja yang bisa dikirim ke server
+    * Client dapat mengetikkan file apa yang akan disimpan di server
+    * Semua tipe ekstensi file dengan berbagai macam ukuran dapat dikirimkan ke server
+    * Ada pesan pemberitahuan jika file berhasil dikirimkan atau tidak
+    * File yang dikirimkan ke server akan disimpan ke dalam server
+    * Identitas file berupa random id, nama file, filesize, dan tipe ekstensi juga disimpan dalam file "mydatafile.dat" di server
+    * Setiap proses yang terjadi pada server tercatat pada log
+* Melihat list file di server dan menampilkannya pada client
+    * Client meminta request data file apa saja yang tersimpan pada server
+    * Server mengirimkan list file yang tersimpan ke client yang berformat JSON
+    * client menampilkan list file menggunakan dataframe agar mudah dilihat
+    * Setiap proses yang terjadi pada server tercatat pada log
+* Mengambil file dari server ke client
+    * Client mengetikkan file apa yang ingin didapatkan
+    * Client mengirimkan request berformat JSON tersebut ke server 
+    * Server mengecek apakah file yang diinginkan terdapat pada database server
+    * File akan dikirimkan ke client apabila file tersimpan pada database server. Jika file tidak tersimpan di database server maka file tidak akan dikirimkan
+    * Client dapat mengetahui status pengirimkan file apakah berhasil atau tidak
+    * Setiap proses yang terjadi pada server tercatat pada log
+    
     
 ### Cara Melakukan Request 
-* Bukti
-    client request file ke server<br>
-    ![Client](foto/1b_client.JPG)
-
-    server mengirimkan file <br>
-    ![Server](foto/1b_server.JPG)
-
-    bukti file yang dikirimkan<br>
-    ![Bukti](foto/1b_hasil.JPG)
+* 
    
 ### Respon yang Didapat
-* Bukti
-    client request file ke server<br>
-    ![Client](foto/1b_client.JPG)
-
-    server mengirimkan file <br>
-    ![Server](foto/1b_server.JPG)
-
-    bukti file yang dikirimkan<br>
-    ![Bukti](foto/1b_hasil.JPG)
+* 
