@@ -30,14 +30,12 @@ class ProcessTheClient(threading.Thread):
                     f.close()
                 hasil = pm.proses(data)
                 if data['aksi']=="get":
+                    self.connection.sendall(hasil.encode())
                     if hasil != "null":
                         f = open(data['file'], 'rb')
                         l = f.read()
                         self.connection.sendall(l)
                         f.close()
-                    else:
-                        #belum
-                        print("no")
                 hasil=hasil+"\r\n"
                 self.connection.sendall(hasil.encode())
                 break
