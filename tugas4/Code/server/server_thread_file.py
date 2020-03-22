@@ -20,6 +20,7 @@ class ProcessTheClient(threading.Thread):
             data = data + recv_file.decode()
             if recv_file[-2:].decode() == "\r\n":
                 data = json.loads(data)
+                print(data)
                 if data['aksi']=="transfer":
                     f = open(data['file'], 'wb')
                     l = self.connection.recv(1024)
@@ -27,8 +28,16 @@ class ProcessTheClient(threading.Thread):
                         f.write(l)
                         l = self.connection.recv(1024)
                     f.close()
-
                 hasil = pm.proses(data)
+                if data['aksi']=="get":
+                    if hasil != "null":
+                        f = open(data['file'], 'rb')
+                        l = f.read()
+                        self.connection.sendall(l)
+                        f.close()
+                    else:
+                        #belum
+                        print("no")
                 hasil=hasil+"\r\n"
                 self.connection.sendall(hasil.encode())
                 break

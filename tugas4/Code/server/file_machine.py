@@ -18,15 +18,14 @@ class FileMachine:
                 hasil = p.list_data()
                 return json.dumps(hasil)
             elif (data['aksi']=='get'):
-                logging.warning("list")
-                nama = cstring[1].strip()
+                logging.warning("get")
+                nama = data['file']
                 hasil = p.get_data(nama)
                 return json.dumps(hasil)
             else:
                 return "ERRCMD"
         except:
             return "ERROR"
-
 
 if __name__=='__main__':
     pm = PersonMachine()

@@ -18,7 +18,7 @@ try:
 
     sock.sendall(data.encode())
     f = open(message, "rb")
-    l_file = f.read()
+    l_file = f.read(1024)
     while (l_file):
         sock.send(l_file)
         l_file = f.read(1024)
