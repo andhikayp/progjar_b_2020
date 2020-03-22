@@ -13,14 +13,18 @@ print(f"connecting to {server_address}")
 sock.connect(server_address)
 
 try:
-    data=""; message = 'list'
-    print(f"sending {message} file")
+    data=""
+    message = json.dumps(dict(aksi="list"))+"\r\n"
+    print(f"sending list")
     sock.sendall(message.encode())
     while True:
         recv_file = sock.recv(16)
         data = data + recv_file.decode()
         if recv_file[-2:].decode() == "\r\n":
-            result_list(data)
+            if data=="ERRCMD\r\n":
+                print("Connection Error")
+            else:
+                result_list(data)
             break
 finally:
     print("closing")
