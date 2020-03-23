@@ -30,10 +30,15 @@ Andhika Yoga Perdana <br> 05111740000101 <br>
     
 
 ### Melihat List File
-* Client meminta request data file apa saja yang tersimpan pada server
-* Server mengirimkan list file yang tersimpan ke client yang berformat JSON
-* client menampilkan list file menggunakan dataframe agar mudah dilihat
-* Setiap proses yang terjadi pada server tercatat pada log
+* Bukti
+    Saat client berjalan<br>
+    ![Kondisi Awal](Foto/list_client.JPG)
+
+    Saat server berjalan<br>
+    ![Port 31000](Foto/list_server.JPG)
+
+    Hasilnya<br>
+    ![Port 31001](Foto/list_file.JPG)
 
 ### Ketentuan Membaca Format
 * Format yang digunakan setiap request data adalah dalam bentuk JSON
