@@ -14,7 +14,6 @@ class ChatClient:
         j=cmdline.split(" ")
         try:
             command=j[0].strip()
-            print(command)
             if (command=='auth'):
                 username=j[1].strip()
                 password=j[2].strip()
@@ -41,11 +40,11 @@ class ChatClient:
             receivemsg = ""
             while True:
                 data = self.sock.recv(64)
-                print("diterima dari server",data)
+                # print("diterima dari server",data)
                 if (data):
                     receivemsg = "{}{}" . format(receivemsg,data.decode())  #data harus didecode agar dapat di operasikan dalam bentuk string
                     if receivemsg[-4:]=='\r\n\r\n':
-                        print("end of string")
+                        # print("end of string")
                         return json.loads(receivemsg)
         except:
             self.sock.close()
@@ -62,7 +61,6 @@ class ChatClient:
         if (self.tokenid==""):
             return "Error, not authorized"
         string="send {} {} {} \r\n" . format(self.tokenid,usernameto,message)
-        print(string)
         result = self.sendstring(string)
         if result['status']=='OK':
             return "message sent to {}" . format(usernameto)
@@ -83,7 +81,7 @@ class ChatClient:
         string="show {} \r\n" . format(self.tokenid)
         result = self.sendstring(string)
         if result['status']=='OK':
-            return "{}" . format(json.dumps(result['messages']))
+            return "{}" . format(result['messages'])
         else:
             return "Error, {}" . format(result['message'])
     def logout(self):
@@ -93,9 +91,9 @@ class ChatClient:
         self.tokenid=""
         result = self.sendstring(string)
         if result['status']=='OK':
-            return "{}" . format(json.dumps(result['messages']))
+            return "Logout berhasil dilakukan!"
         else:
-            return "Error, {}" . format(result['message'])
+            return "Proses Logout Gagal"
 if __name__=="__main__":
     cc = ChatClient()
     while True:

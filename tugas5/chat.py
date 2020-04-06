@@ -36,6 +36,7 @@ class Chat:
 				sessionid = j[1].strip()
 				username = self.sessions[sessionid]['username']
 				logging.warning("SHOW: {}" . format(sessionid))
+
 				return self.get_show(sessionid,username)
 			elif (command=='logout'):
 				sessionid = j[1].strip()
@@ -73,22 +74,16 @@ class Chat:
 		message = { 'msg_from': s_fr['nama'], 'msg_to': s_to['nama'], 'msg': message }
 		outqueue_sender = s_fr['outgoing']
 		inqueue_receiver = s_to['incoming']
-		print("test", outqueue_sender, inqueue_receiver)
 		try:
 			outqueue_sender[username_from].put(message)
-			print("ok")
 		except KeyError:
-			print("wkwk")
 			outqueue_sender[username_from]=Queue()
 			outqueue_sender[username_from].put(message)
 		try:
 			inqueue_receiver[username_from].put(message)
-			print("kok")
 		except KeyError:
-			print("kwkw")
 			inqueue_receiver[username_from]=Queue()
 			inqueue_receiver[username_from].put(message)
-		print("fix", outqueue_sender, inqueue_receiver)
 		return {'status': 'OK', 'message': 'Message Sent'}
 
 	def get_inbox(self,username):
@@ -107,7 +102,11 @@ class Chat:
 		s_fr = self.get_user(username)
 		if (s_fr==False):
 			return {'status': 'ERROR', 'message': 'User Tidak Ditemukan'}
-		return {'status': 'OK', 'messages': self.sessions}
+		user_login = []
+		for k, v in self.sessions.items():
+			if v['username'] not in user_login:
+				user_login.append(v['username'])
+		return {'status': 'OK', 'messages': user_login}
 
 	def logout(self,sessionid,username):
 		if (sessionid not in self.sessions):
@@ -129,10 +128,10 @@ if __name__=="__main__":
 	# print(j.sessions)
 	inbox = j.proses("show " + sesi['tokenid'])
 	print(inbox)
-	print(j.sessions)
-	logout = j.proses("logout " + sesi['tokenid'])
-	print(logout)
-	print(j.sessions)
+	# print(j.sessions)
+	# logout = j.proses("logout " + sesi['tokenid'])
+	# print(logout)
+	# print(j.sessions)
 	#sesi = j.autentikasi_user('messi','surabaya')
 	#print sesi
 	#tokenid = sesi['tokenid']
