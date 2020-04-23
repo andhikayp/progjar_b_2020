@@ -17,8 +17,8 @@ class HttpServer:
 		resp.append("Connection: close\r\n")
 		resp.append("Server: myserver/1.0\r\n")
 		resp.append("Content-Length: {}\r\n" . format(len(messagebody)))
-		for kk in headers:
-			resp.append("{}:{}\r\n" . format(kk,headers[kk]))
+		# for kk in headers:
+		# 	resp.append("{}:{}\r\n" . format(kk,headers[kk]))
 		resp.append("\r\n")
 		resp.append("{}" . format(messagebody))
 		response_str=''
@@ -32,6 +32,7 @@ class HttpServer:
 		baris = requests[0]
 
 		all_headers = [n for n in requests[1:] if n!='']
+		print(all_headers)
 		j = baris.split(" ")
 		try:
 			method=j[0].upper().strip()
@@ -61,11 +62,17 @@ class HttpServer:
 			isi = '<h1>SERVER HTTP</h1>'
 		return self.response(200,'OK',isi,headers)
 
+	def listToString(s, header):
+		str1 = ""
+		for ele in header:
+			str1 = str1 + '<br>' + ele
+		return str1
+
 	def http_post(self,object_address,headers, value):
-		headers ={}
-		isi = value[1]
+		header = headers
+		isi = "Value: "+value[1]+"<br>Headers: "+ self.listToString(headers)
 		print(isi)
-		return self.response(200,'OK',isi,headers)
+		return self.response(200,'OK',isi,header)
 
 if __name__=="__main__":
 	httpserver = HttpServer()
